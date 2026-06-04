@@ -1,0 +1,304 @@
+/* =========================================================================
+   Lessons of the Game Makers — style.css
+   Warm near-black / amber / teal house palette, authored in OKLCH.
+   Layout follows mise-en-page: single column, fixed measure, tiered rhythm,
+   one weight moment per panel (the section numeral), drop cap reserved for
+   the long-form synthesis.
+   ========================================================================= */
+
+/* ---- Design tokens ---------------------------------------------------- */
+:root {
+  /* Palette — OKLCH. Accents punctuate; they never fill. */
+  --bg:        oklch(0.16 0.012 70);   /* warm near-black, ink-on-vellum register */
+  --bg-raised: oklch(0.20 0.014 70);   /* tab strip, active tab seat */
+  --ink:       oklch(0.92 0.015 80);   /* body */
+  --ink-dim:   oklch(0.74 0.018 80);   /* secondary prose, glosses */
+  --ink-faint: oklch(0.52 0.020 75);   /* section numerals, hairlines (non-text / large) */
+  --ink-quiet: oklch(0.60 0.020 78);   /* smallest body text — meets WCAG AA 4.5:1 on --bg */
+  --amber:     oklch(0.80 0.13 70);    /* active / emphasis / focus ring */
+  --amber-dim: oklch(0.80 0.13 70 / 0.16);
+  --teal:      oklch(0.78 0.10 200);   /* links, source attributions */
+
+  /* Type */
+  --font-display: "Cormorant Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-body:    "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Measure — the single highest-leverage reading variable (~66ch) */
+  --measure: 66ch;
+
+  /* Rhythm — one base unit, all spacing derived */
+  --space-xs: 0.25rem;   /* within a component */
+  --space-sm: 0.5rem;    /* bonded pairs */
+  --space-md: 1rem;      /* between paragraphs */
+  --space-lg: 2rem;      /* between sections */
+  --space-xl: clamp(3rem, 7vw, 5rem); /* major page regions */
+}
+
+/* ---- Reset & base ----------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: clamp(1.125rem, 0.97rem + 0.65vw, 1.25rem);
+  line-height: 1.55;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* belt-and-braces against any horizontal scroll */
+}
+
+/* Shared content measure — masthead, tabs, panels, colophon all align to it. */
+.masthead,
+.tablist,
+.panel,
+.colophon {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 5vw, 2rem);
+}
+
+/* Links: teal, restrained. */
+a { color: var(--teal); }
+
+/* Visible focus ring everywhere — amber outline. */
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link — only visible on focus. */
+.skip-link {
+  position: absolute;
+  left: var(--space-md);
+  top: -3rem;
+  background: var(--bg-raised);
+  color: var(--amber);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-decoration: none;
+  z-index: 10;
+  transition: top 0.18s ease;
+}
+.skip-link:focus { top: var(--space-md); }
+
+/* ---- Masthead --------------------------------------------------------- */
+.masthead {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.headline {
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 1.6rem + 4.6vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.standfirst {
+  margin: 0;
+  color: var(--ink-dim);
+  font-style: italic;
+  font-size: 1.06rem;
+  text-wrap: balance;
+}
+
+/* ---- Tab strip -------------------------------------------------------- */
+.tabs {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: color-mix(in oklab, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--ink-faint);
+}
+
+.tablist {
+  display: flex;
+  gap: var(--space-xs);
+  /* Narrow screens: scroll the strip; every tab stays reachable, no menu. */
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  padding-block: var(--space-sm);
+}
+.tablist::-webkit-scrollbar { height: 4px; }
+.tablist::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 2px; }
+
+.tab {
+  flex: 0 0 auto;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  padding: var(--space-sm) var(--space-md);
+  color: var(--ink-dim);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.16s ease, background-color 0.16s ease;
+}
+.tab:hover { color: var(--ink); }
+
+.tab[aria-selected="true"] {
+  color: var(--amber);
+  background: var(--amber-dim);
+}
+
+/* ---- Panels ----------------------------------------------------------- */
+.panels { padding-bottom: var(--space-xl); }
+
+.panel {
+  padding-top: var(--space-xl);
+}
+
+/* Progressive enhancement: when JS is on, collapse to the active panel.
+   With JS off, .js is never set, so every panel stays visible as a scroll. */
+.js .panel { display: none; }
+.js .panel.is-active { display: block; }
+
+/* Section opener grammar: large faint numeral (the weight moment),
+   then the head, then the lead. */
+.section-mark {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 2rem + 5vw, 5rem);
+  line-height: 0.9;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
+
+.section-head {
+  margin: var(--space-xs) 0 var(--space-md);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 1.2rem + 2.4vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.lead {
+  margin: 0 0 var(--space-lg);
+  color: var(--ink);
+  font-size: 1.14em;
+}
+.panel p { text-wrap: pretty; }
+
+/* Lesson sets — numbered (Rosewater) and bulleted (selections). */
+.lessons {
+  margin: 0 0 var(--space-lg);
+  padding-left: 1.6em;
+}
+.lessons li {
+  margin-bottom: var(--space-md);
+  padding-left: 0.3em;
+}
+.lessons li::marker {
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+}
+.lessons strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+/* The gloss after the imperative reads as secondary. */
+.lessons strong + * { color: var(--ink-dim); }
+
+/* Schell's lenses — a definition list reads truer than a bullet list. */
+.lenses { margin: 0 0 var(--space-lg); }
+.lenses dt {
+  font-family: var(--font-display);
+  font-size: 1.18em;
+  color: var(--amber);
+  margin-top: var(--space-md);
+}
+.lenses dd {
+  margin: var(--space-xs) 0 0;
+  color: var(--ink-dim);
+}
+
+/* Framing note — set apart from the list it qualifies. */
+.framing {
+  margin: 0 0 var(--space-lg);
+  padding-left: var(--space-md);
+  border-left: 2px solid var(--ink-faint);
+  color: var(--ink-dim);
+  font-style: italic;
+}
+
+/* Synthesis: drop cap reserved for the one long-form reading piece. */
+.dropcap {
+  float: left;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 3.4em;
+  line-height: 0.74;
+  padding: 0.04em 0.08em 0 0;
+  color: var(--amber);
+}
+.panel--essay p { margin: 0 0 var(--space-md); }
+
+.coda {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--ink-faint);
+  color: var(--ink-dim);
+  font-size: 0.98em;
+}
+
+/* Attribution — structural metadata, mono + teal, at the panel foot. */
+.attribution {
+  margin: var(--space-lg) 0 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: var(--teal);
+}
+.attribution .work { font-style: normal; }
+
+/* ---- Colophon --------------------------------------------------------- */
+.colophon {
+  padding-block: var(--space-xl);
+  color: var(--ink-quiet);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-align: center;
+}
+.colophon p { margin: 0; }
+
+/* ---- Motion ----------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js .panel.is-active { animation: panel-fade 0.28s ease both; }
+}
+@keyframes panel-fade {
+  from { opacity: 0; transform: translateY(0.4rem); }
+  to   { opacity: 1; transform: none; }
+}

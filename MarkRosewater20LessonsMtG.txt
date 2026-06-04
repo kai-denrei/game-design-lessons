@@ -1,0 +1,25 @@
+20 game design lessons
+Mark Rosewater
+(GDC talk detailing his 20 years of experience with *Magic: The Gathering)
+
+1. Fighting against human nature is a losing battle [1, 2]. Do not try to change your players to match your game; change your game to fit your human audience [2]. 
+2. Aesthetics matter [3, 4]. You must understand human perception, as players expect game components to have a certain feel (like balance, symmetry, and pattern completion) [4, 5]. 
+3. Resonance is important [6, 7]. Your audience comes preloaded with emotional responses from pop culture (like a familiarity with zombies), which you can use to build a rich emotional experience [6, 7].
+4. Make use of piggybacking [8]. You can use your audience's pre-existing knowledge to front-load game mechanics and make learning easier [8].
+5. Don't confuse interesting with fun [9, 10]. While intellectual stimulation makes a game "interesting," emotional stimulation is what actually creates "fun" and player satisfaction [10]. 
+6. Understand what emotion your game is trying to evoke [11]. Every component in your game must contribute to the overarching emotional experience you are trying to create, or it needs to be cut [12, 13].
+7. Allow the player the ability to make the game personal [14, 15]. Giving players a wealth of choices helps them establish a personal connection with the game, which intrinsically leads them to view it as higher quality [15, 16]. 
+8. The details are where your player falls in love with your game [17]. Players bond over specific details—even seemingly insignificant ones like a single piece of art or a minor character—to find a piece of the game to call their own [17, 18].
+9. Allow your players to have a sense of ownership [19, 20]. Through deep customization, a game stops being just the designer's creation and becomes a personal extension of the player [19, 20].
+10. Leave room for your players to explore [21, 22]. Instead of showing players everything directly, let them discover aspects of the game on their own; this makes them far more invested [21, 22].
+11. If everyone likes your game but no one loves it, it will fail [23, 24]. You should worry less about avoiding negative responses and focus more on evoking strong, passionate reactions, as a game needs players who truly love it to survive [24, 25].
+12. Don't design to prove you can do something [26, 27]. Never let your ego drive your motivation; every design decision must serve the optimal experience for the target audience rather than a need for self-satisfaction [27].
+13. Make the fun part also the correct strategy to win [28, 29]. It is the designer's job to guide players to the fun, because players will ultimately do whatever it takes to win—and they will blame the game if that winning path isn't enjoyable [28].
+14. *(Note: The exact title of Lesson 14 is cut off in the transcript, but the lesson revolves around educating player behavior by force)*. When players are afraid to take an optimal action in the game, sometimes the solution is to explicitly force them to do it so they learn it is a good strategy [29, 30].
+15. Design the component for the audience it's intended for [31, 32]. Trying to please everyone at once usually pleases no one; figure out exactly who a specific game component is for and maximize it for them while ignoring the rest of the audience [31, 32].
+16. Be more afraid of boring your players than challenging them [33, 34]. Taking risks is vital because players will forgive you for trying something grandiose and failing, but they will deeply resent being bored [34].
+17. You don't have to change much to change everything [35, 36]. Instead of constantly adding new things and over-complicating your game, realize that tweaking one small foundational element can create a radically different player experience [35, 36].
+18. Restrictions breed creativity [37, 38]. Forcing yourself to start from a restricted or unfamiliar vantage point prevents your brain from relying on old neural pathways, leading to completely new ideas and solutions [38, 39].
+19.
+Your audience is good at recognizing problems and bad at solving them [40, 41]. Players are an excellent barometer for identifying when something feels wrong in a game, but they lack the tools to properly fix it, so take their proposed solutions with a grain of salt [41].
+20. All the lessons connect [42]. Game design is a holistic discipline, and these are not separate lessons, but rather one large, interconnected view of the craft [42].
