@@ -20,14 +20,14 @@
   // Bare "/cb-shapes/..." 404s under a sub-path; on iOS Safari the broken
   // <img> renders as the system placeholder, which reads as "???" in a row.
   // Falls back to "/cb-shapes/" + ".svg" only when no such link exists.
-  let cellPrefix = "/cb-shapes/";
+  let cellPrefix = "cb-shapes/";
   let cellExt = ".svg";
   const fav = document.querySelector(
-    'link[rel~="icon"][href*="/cb-shapes/"]'
+    'link[rel~="icon"][href*="cb-shapes/"]'
   );
   if (fav) {
     const href = fav.getAttribute("href") || "";
-    const m = href.match(/^(.*\/cb-shapes\/)\d{2}\.(svg|webp)(\?.*)?$/);
+    const m = href.match(/^(.*cb-shapes\/)\d{2}\.(svg|webp)(\?.*)?$/);
     if (m) {
       cellPrefix = m[1];
       cellExt = "." + m[2];

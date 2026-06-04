@@ -84,10 +84,14 @@ CELL=$(( B0 % 64 ))
 FAVICON=$(printf "%02d" $CELL)
 
 while IFS= read -r f; do
-  if grep -qE '/cb-shapes/[0-9]{2}\.(webp|svg)' "$f"; then
-    sed "${SED_INPLACE[@]}" -E "s#/cb-shapes/[0-9]{2}(\.(webp|svg))#/cb-shapes/${FAVICON}\1#g" "$f"
+  # Prefix-agnostic: match cb-shapes/NN.ext whether the href is root-absolute
+  # (/cb-shapes/..) or relative (cb-shapes/..). The leading prefix sits outside
+  # the match and is preserved, so a relative favicon stays relative across bumps
+  # (required for GitHub Pages project sub-paths and file://).
+  if grep -qE 'cb-shapes/[0-9]{2}\.(webp|svg)' "$f"; then
+    sed "${SED_INPLACE[@]}" -E "s#cb-shapes/[0-9]{2}(\.(webp|svg))#cb-shapes/${FAVICON}\1#g" "$f"
     rm -f "${f}.cbbak"
-    [[ -z "$QUIET" ]] && echo "  ✓ favicon → /cb-shapes/${FAVICON} in $f"
+    [[ -z "$QUIET" ]] && echo "  ✓ favicon → cb-shapes/${FAVICON} in $f"
     REWRITTEN=$((REWRITTEN + 1))
   fi
 done < <(walk_source_files)

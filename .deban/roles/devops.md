@@ -17,6 +17,7 @@ server-side header recipes.
 | 2026-06-04 | Serve V1 via `python3 -m http.server` from project root. | Zero-dep, present everywhere; satisfies "localhost to look at". | [[arch]] |
 | 2026-06-04 | Install cache-busting with `--no-badge` NOT used — badge IS wanted (3 shapes). cairosvg absent → SVG-only shape cells (acceptable, no rasterization needed). | User explicitly asked for the 3-shape visual versioning. | [[arch]] |
 | 2026-06-04 | `bust.sh` is the version-bump command; document wiring (post-commit / manual) but do not add a build step (brief: no build). | Versioning control via token bump without violating no-build constraint. | [[arch]] |
+| 2026-06-04 | **Resolved** the badge/favicon sub-path 404 by making all same-origin cb refs RELATIVE (`cb-shapes/NN.svg`, `cb-badge.js`) and patching `bust.sh` (gate + sed) to be prefix-agnostic so bumps stay relative. Also widened `cb-badge.js`'s favicon selector + derive-regex to match relative hrefs. | Reverses the earlier "accepted limitation": relative paths work on the GitHub Pages project sub-path, at root, AND under file:// — strictly more portable, since index.html sits at the served root. Durable because `bust.sh` no longer re-absolutizes the favicon. | [[arch]] |
 
 ## Dead Ends
 <!-- APPEND ONLY. Never delete. -->
@@ -42,6 +43,13 @@ Blocked by: [[arch]]
 Feeds into: [[qa]]
 
 ## Session Log
+- 2026-06-04 — FIX. Relativized cb refs + patched bust.sh to be prefix-agnostic →
+  badge/favicon now work on the Pages sub-path. Bumped token to 82519499. Redeployed.
+- 2026-06-04 — DEPLOY. git init → pushed to github.com/kai-denrei/game-design-lessons
+  (public). GitHub Pages live at https://kai-denrei.github.io/game-design-lessons/
+  (main/root). Reader fully functional (7 panels, relative style.css/app.js → 200).
+  As predicted, the version badge/favicon 404 on the Pages **project subpath** (same
+  root-absolute-path limitation as file://). Reader unaffected.
 - 2026-06-04 — SYNC. Installed cache-busting (token b7ea4f06). Moved assets to served
   root. Recorded the file:// badge limitation as accepted.
 - 2026-06-04 — INIT. Chose python http.server; planned cache-busting install with badge.
